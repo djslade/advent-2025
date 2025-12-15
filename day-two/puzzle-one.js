@@ -1,0 +1,27 @@
+const rawSequences =
+  "9226466333-9226692707,55432-96230,4151-6365,686836-836582,519296-634281,355894-471980,971626-1037744,25107-44804,15139904-15163735,155452-255998,2093-4136,829776608-829880425,4444385616-4444502989,2208288-2231858,261-399,66-119,91876508-91956018,2828255673-2828317078,312330-341840,6464-10967,5489467-5621638,1-18,426-834,3434321102-3434378477,4865070-4972019,54475091-54592515,147-257,48664376-48836792,45-61,1183-1877,24-43";
+
+const sequences = rawSequences.split(",").map((sequence) => {
+  const startAndEnd = sequence.split("-");
+  const parsedSequence = {
+    start: parseInt(startAndEnd[0]),
+    end: parseInt(startAndEnd[1]),
+  };
+  return parsedSequence;
+});
+
+let total = 0;
+
+sequences.forEach((sequence) => {
+  for (let i = sequence.start; i <= sequence.end; i++) {
+    const toString = String(i);
+    if (toString.length % 2 !== 0) continue;
+    const firstHalf = toString.slice(0, toString.length / 2);
+    const secondHalf = toString.slice(toString.length / 2);
+    if (firstHalf === secondHalf) {
+      total += i;
+    }
+  }
+});
+
+console.log(total);
